@@ -43,9 +43,18 @@ Then configure the rules you want to use under the rules section.
 
 ## Supported Rules
 
-* Fill in provided rules here
+### `avoid-ios9-viewport-bug`
 
+`window.innerWidth` and `window.innerHeight` may have unexpected value
+in iOS9 Mobile Saferi because [the bug](https://forums.developer.apple.com/thread/13510).
+This rule resticts to use `window.innerWidth` and `window.innerHeight`
+and recommends to use `document.documentElement.clientWidth` or `document.Element.clientHeight`
+instead of that properties.
 
+```javascript
+var innerWidth = window.innerWidth; // error
+var innerHeight = window.innerHeight; // error
 
-
-
+var innerWidth = document.documentElement.clientWidth; // not error
+var innerHeight = document.documentElement.clientHeight; // not error
+```
